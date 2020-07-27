@@ -23,7 +23,7 @@ METRICS = ['accuracy']
 
 def model():
     #? Create the base model from the pre-trained model DenseNet121
-    base_model = tf.keras.applications.DenseNet121(input_shape=IMG_SHAPE,
+    base_model = tf.keras.applications.MobileNet(input_shape=IMG_SHAPE,
                                                    include_top=False,
                                                    weights='imagenet')
     base_model.trainable = False
@@ -50,7 +50,7 @@ def model():
 
 def beforeCompile(model):
     model.layers[0].trainable = True
-    for layer in model.layers[0].layers[:227]:
+    for layer in model.layers[0].layers[:100]:
         layer.trainable = False
     return model
 
