@@ -1,3 +1,3 @@
-train_dirs = 'myData/Train/'
-validation_dirs = 'myData/Valid/'
+train_dirs = 'MyData/Train/'
+validation_dirs = 'MyData/Valid/'
 model_dirs = "model/"
