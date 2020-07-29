@@ -12,7 +12,7 @@ TODO: v2 -> fine tune, lr=1-e5, 200 layer trainable
 """
 MODEL_NAME = os.path.basename(__file__).replace(".py","")
 TUNNING = 100
-IMAGE_SIZE = 128
+IMAGE_SIZE = 224
 CLASSES_NUM = 26
 COLOR_MODE = 'rgb'
 CLASSES_MODE = 'categorical'
