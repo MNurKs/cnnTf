@@ -28,28 +28,32 @@ ACTIVATION_DENSE_END = 'sigmoid'
 def model():
     print("Create Model")
     model = tf.keras.Sequential()
-    model.add(tf.keras.layers.Conv2D(128, (3, 3), padding='same',
-                     activation=ACTIVATION_CONV, input_shape=224,224,1))
+    model.add(tf.keras.layers.Conv2D(64, (3, 3), padding='same',
+                     activation=ACTIVATION_CONV, input_shape=IMG_SHAPE))
     model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
-    #BLOCK1
+    model.add(tf.keras.layers.BatchNormalization())
+
     model.add(tf.keras.layers.Conv2D(128, (3, 3), padding='same', activation=ACTIVATION_CONV))
     model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
-    #BLOCK2
-    model.add(tf.keras.layers.Conv2D(64, (3, 3), padding='same', activation=ACTIVATION_CONV))
+    model.add(tf.keras.layers.BatchNormalization())
+
+    model.add(tf.keras.layers.Conv2D(192, (3, 3), padding='same', activation=ACTIVATION_CONV))
     model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
-    #BLOCK3
-    model.add(tf.keras.layers.Conv2D(32, (3, 3), padding='same', activation=ACTIVATION_CONV))
+    model.add(tf.keras.layers.BatchNormalization())
+
+    model.add(tf.keras.layers.Conv2D(256, (3, 3), padding='same', activation=ACTIVATION_CONV))
     model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
-    #CLASIFICATION
+    model.add(tf.keras.layers.BatchNormalization())
+
     model.add(tf.keras.layers.Flatten())
 
-    model.add(tf.keras.layers.Dense(128, activation='relu'))
+    model.add(tf.keras.layers.Dense(256, activation=ACTIVATION_DENSE))
     model.add(tf.keras.layers.Dropout(DROPOUT))
-    model.add(tf.keras.layers.Dense(128, activation='relu'))
+    model.add(tf.keras.layers.Dense(256, activation=ACTIVATION_DENSE))
     model.add(tf.keras.layers.Dropout(DROPOUT))
-    model.add(tf.keras.layers.Dense(64, activation='relu'))
+    model.add(tf.keras.layers.Dense(256, activation=ACTIVATION_DENSE))
     model.add(tf.keras.layers.Dropout(DROPOUT))
-    model.add(tf.keras.layers.Dense(32, activation='softmax'))
+    model.add(tf.keras.layers.Dense(CLASSES_NUM, activation=ACTIVATION_DENSE_END))
 
     model.compile(optimizer=OPTIMIZER,
                   loss=LOSS,
